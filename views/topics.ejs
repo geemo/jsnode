@@ -1,0 +1,65 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<% if(key){ %>
+		<span data-key=<%- key %>>搜索"<%- key %>"的结果</span>
+	<% }else{ %>	
+		<% if(banName){ %>
+			<a href="/topics">话题中心</a>
+			<span>/</span>
+			<span><%- banName %></span>
+		<% }else{ %>
+			<span>话题中心</span>	
+		<% } %>
+	<% } %>
+</section>
+<section class="tool-bar">
+	<span>功能</span>
+	<% if(banName){ %>
+	<a href=<%- "/topics/addition?type_id=" + type_id %>>发帖</a>
+	<% } %>
+	<div class="menu">
+		<div class="menu-head">
+			<span><%- banName ? banName : "显示所有" %></span>
+			<span class="arrow"></span>
+		</div>
+		<div class="menu-list" style="display:none">
+			<a href="/topics">显示所有</a>
+			<a href="/topics?type_id=0">默认板块</a>
+			<a href="/topics?type_id=1">笑话段子</a>
+			<a href="/topics?type_id=2">Node交流</a>
+			<a href="/topics?type_id=3">Web设计交流</a>
+			<a href="/topics?type_id=4">MongoDB交流</a>
+			<a href="/topics?type_id=5">Nginx交流</a>
+		</div>
+	</div>
+
+</section>
+<section class="tool-bar">
+	<span>排序</span>
+	<a href=<%- key ? ("/topics?order=0&type_id=" + type_id + "&key=" + key) : ("/topics?order=0&type_id=" + type_id) %> class=<%- order == 0 ? "active" : ""%>>动态</a>
+	<a href=<%- key ? ("/topics?order=1&type_id=" + type_id + "&key=" + key) : ("/topics?order=1&type_id=" + type_id) %> class=<%- order == 1 ? "active" : ""%>>最新</a>
+	<a href=<%- key ? ("/topics?order=2&type_id=" + type_id + "&key=" + key) : ("/topics?order=2&type_id=" + type_id) %> class=<%- order == 2 ? "active" : ""%>>点赞量</a>
+	<a href=<%- key ? ("/topics?order=3&type_id=" + type_id + "&key=" + key) : ("/topics?order=3&type_id=" + type_id) %> class=<%- order == 3 ? "active" : ""%>>阅读量</a>
+</section>
+<%- include topics_card %>
+<section class="page">
+	<ul><!--
+		--><li><span>首页</span></li><!--
+		--><li><span>上一页</span></li><!--
+		--><li><!--
+			--><span><!--
+				--><input class="jump-input" type="text" data-url=<%- banName ? ("/topics?type_id=" + type_id) :  "/topics"%> data-total-page=<%- totalPage %> value=<%- page %>>&nbsp;/&nbsp;<%- totalPage %><!--
+			--></span><!--
+		--></li><!--
+		--><li>下一页</li><!--
+--></ul>
+</section>
+<% if(banName){ %>
+<section class="card">
+	<h2>斑竹列表</h2>
+	<p>此板块还没有版主</p>
+</section>
+<% } %>
+<%- include footer %>

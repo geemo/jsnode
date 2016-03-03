@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>JS Node</title>
+	<link rel="stylesheet" href="/stylesheets/reset.css">
+	<link rel="stylesheet" href="/stylesheets/main.css">
+	<link rel="stylesheet" href="/stylesheets/iconfont.css">
+	<link rel="icon" href="/node.jpg" type="image/*">
+</head>
+<body>
+	<header>
+		<nav>
+			<a href="/" class="icon icon-zhuye">首页</a>
+			<% if(sessUser){ %>	
+			<a href=<%- "/users/" + sessUser.username %> class="icon icon-iconfonticon5">个人</a>
+			<a href="/friend" class="icon icon-friend">好友</a>
+			<a href="/message" class="icon icon-huifu">消息</a>
+			<% }else{ %>
+			<a href="/signin" class="icon icon-iconfonticon5">个人</a>
+			<a href="/signin" class="icon icon-friend">好友</a>
+			<a href="/signin" class="icon icon-huifu">消息</a>
+			<% } %>	
+		</nav>
+	</header>

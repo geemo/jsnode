@@ -1,0 +1,66 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<a href="/topics">话题中心</a>
+	<span>/</span>
+	<a href=<%- "/topics?type_id=" + topic.type_id %>><%- banName %></a>
+	<span>/</span>
+	<span>内容详情</span>
+</section>
+<section class="card">
+	<h1 class="topic-title"><%- topic.title %></h1>
+	<div class="topic-btm">
+		<span><i class="icon icon-shizhong" style="font-size:12px"></i><%- topic.dateStr + ' ' + topic.timeStr %>&nbsp;<i class="icon icon-iconfontchakan" style="font-size:16px"></i><%- topic.readNum + 1 %></span>
+	</div>
+	<p class="topic-content"><%- topic.content %></p>
+	<div class="extra">
+		<span>
+			<a href=<%- "/action?a=f&topic_id=" + topic._id %>>
+			<% if(isFavor){ %>
+			<i class="icon icon-pingjia1"></i>
+			<% }else{ %>
+			<i class="icon icon-pingjia2"></i>
+			<% } %><span class="extra-favor-num"><%- topic.favorNum %></span></a>
+			<a href=<%- "/action?a=z&topic_id=" + topic._id %>><i class="icon icon-kongaixin"></i><span class="extra-zan-num"><%- topic.zanNum %></span></a>
+		</span>
+	</div>
+</section>
+<section class="user-card">
+	<a class="preview" href=<%- "/users/" + topic.username %>>
+		<img src=<%- (user && user.imgUrl) ? ("/images/" + user.imgUrl) : "/node.jpg" %>>
+	</a>	
+	<h2><a href=<%- "/users/" + topic.username %>><%- topic.nickname %></a></h2>
+	<p><%- user.sign %></p>
+</section>
+<section class="card" id="cmtsCard">
+	<h2>用户评论</h2>
+	<% for(var i = 0; i < cmts.length ; ++i){ %>
+	<div class="comment">
+		<div class="comment-title">
+			<a href=<%- "/users/" + cmts[i].username %>><img src=<%- cmts[i].headImgUrl ? ("/images/" + cmts[i].headImgUrl) : "/node.jpg" %>></a>
+			<span>#<%- i + 1 %></span>
+		</div>
+		<h3><a href=<%- "/users/" + cmts[i].username %>><%- cmts[i].nickname %></a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i><%- cmts[i].date %>&nbsp;<a href="">回复</a></span></h3>
+		<% if(cmts[i].imgUrl){ %>
+		<p><img src=<%- "/pictures/" + cmts[i].imgUrl %>><%- cmts[i].content %></p>
+		<% }else{ %>
+		<p><%- cmts[i].content %></p>	
+		<% } %>	
+	</div>	
+	<% } %>	
+</section>
+
+<section class="comment-card">
+	<form action="/comments" target="cmtJump" method="post" enctype="multipart/form-data">
+		<span class="face-btn"><i class="icon icon-biaoqing2"></i></span>
+		<label for="imgBtn" class="img-btn"><i class="icon icon-tupian"></i></label>
+		<input type="file" id="imgBtn" name="img" accept="image/*" style="display: none">
+		<div class="preview" style="display:none"><img><span></span></div>
+		<input type="text" class="msg-ipt" name="msg" placeholder="评论内容不能为空!" autocomplete="off">
+		<input type="hidden" name="topic_id" value=<%- topic._id %>>
+		<a class="send-btn" href=<%- sessUser ? "javascript:void(0);" : "/signin"%>><i class="icon icon-daohang"></i></a>
+	</form>
+	<iframe name="cmtJump" style="display:none"></iframe>
+</section>
+<%- include footer %>

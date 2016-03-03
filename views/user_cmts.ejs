@@ -1,0 +1,27 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<a href=<%- "/users/" + username %>>个人空间</a>
+	<span>/</span>
+	<span><%- sessUser && (sessUser.username == username) ? "我的评论" : "Ta的评论" %></span>
+</section>
+<section class="card">
+	<% if(cmts.length){ %>
+		<ul class="content-list">
+		<% for(var i = 0; i < cmts.length ; ++i){ %>
+			<li>	
+				<a href=<%- "/topics/search?_id=" + cmts[i].topic_id %>>
+					<span class="right"><%- cmts[i].date %></span>
+					<p><%- cmts[i].content %></p>	
+				</a>
+			</li>		
+		<% } %>	
+		</ul>
+	<% } %>
+	<% if(!cmts.length){ %>
+		<p>没有任何内容</p>
+	<% } %>	
+</section>
+<%- include user_page %>
+<%- include footer %>

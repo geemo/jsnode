@@ -1,0 +1,64 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<span>个人空间</span>
+</section>
+<section class="user-card">
+	<form target="jumpTarget" enctype="multipart/form-data" method="post" action=<%= sessUser ? ("/users/" + sessUser.username + "/uploadImg") : "" %>>
+		<label for="imgBtn" class="preview">
+			<img src=<%- (user && user.imgUrl) ? ("/images/" + user.imgUrl) : "/node.jpg" %>>
+		</label>
+		<% if(sessUser && sessUser.username == user._id){ %>
+		<input type="file" name="img" accept="image/*" id="imgBtn" style="display:none">
+		<button type="submit">保存</button>
+		<% } %>
+	</form>
+	<iframe name="jumpTarget" style="display:none"></iframe>
+	<h2><%- user.nickname %></h2>
+	<p><%- user.sign %></p>
+</section>
+<section class="tool-bar">
+	<% if(sessUser && sessUser.username == user._id){ %>
+	<span>我的</span>	
+	<% }else{ %>
+	<span>Ta的</span>	
+	<% } %>	
+	<a href=<%- "/users/" + user._id + "/topics" %>>话题</a>
+	<a href=<%- "/users/" + user._id + "/comments" %>>评论</a>
+	<a href=<%- "/users/" + user._id + "/favors" %>>收藏</a>
+	<% if(sessUser && sessUser.username == user._id){ %>
+	<a href="">好友</a>
+	<a href="">消息</a>	
+	<% } %>	
+</section>
+<section class="tool-bar">
+	<% if(sessUser && sessUser.username == user._id){ %>
+	<span>设置</span>	
+	<a href="">资料</a>
+	<a href="">密码</a>
+	<a href=<%- "/users/" + sessUser.username + "/signout" %>>退出</a>	
+	<% }else{ %>
+	<span>动作</span>	
+	<a href="">发信息</a>
+	<a href="">加为好友</a>	
+	<% } %>	
+</section>
+<section class="card">
+	<% if(sessUser && sessUser.username == user._id){ %>
+	<h2>我的信息</h2>	
+	<% }else{ %>
+	<h2>Ta的信息</h2>	
+	<% } %>
+	<ul class="user-info">
+		<li><span>称号</span><span><%- user.levelName %></span></li>
+		<li><span>经验</span><span><%- user.exprNum %></span></li>
+		<li><span>金币</span><span><%- user.goldNum %></span></li>
+		<li><span>性别</span><span><%- user.sex %></span></li>
+		<li><span>手机号</span><span><%- user.tel %></span></li>
+		<li><span>邮箱</span><span><%- user.email %></span></li>
+		<li><span>状态</span><span><%- user.state %></span></li>
+		<li><span>注册时间</span><span><%- user.regDate %></span></li>
+	</ul>
+</section>
+<%- include footer %>

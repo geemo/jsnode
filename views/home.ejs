@@ -1,0 +1,114 @@
+<%- include header %>
+<section class="search">
+	<input name="key" placeholder="请输入关键字">
+	<span class="icon icon-search2"></span>
+</section>
+<section class="tabs">
+	<ul class="tabs-title">
+		<li class="active">上升</li>
+		<li>新帖</li>
+		<li>点赞量</li>
+		<li>阅读量</li>
+	</ul>
+	<ul class="tabs-content">
+		<li style="display:block">
+			<ul class="content-list">
+				<% for(var i = 0, o0 = results['o0']; i < o0.length; ++i){ %>
+				<li>
+					<a href=<%- "/topics/search?_id=" + o0[i]._id %>>
+						<span style="float:right"><%- o0[i].upDate %></span>
+						<p><%- o0[i].title %></p>
+					</a>
+				</li>
+				<% } %>	
+			</ul>
+		</li>
+		<li style="display:none">
+			<ul class="content-list">
+				<% for(var i = 0, o1 = results['o1']; i < o1.length; ++i){ %>
+				<li>
+					<a href=<%- "/topics/search?_id=" + o1[i]._id %>>
+						<span style="float:right"><%- o1[i].dateStr + " " + o1[i].timeStr %></span>
+						<p><%- o1[i].title %></p>
+					</a>
+				</li>
+				<% } %>	
+			</ul>
+		</li>
+		<li style="display:none">
+			<ul class="content-list">
+				<% for(var i = 0, o2 = results['o2']; i < o2.length; ++i){ %>
+				<li>
+					<a href=<%- "/topics/search?_id=" + o2[i]._id %>>
+						<span style="float:right"><%- o2[i].zanNum %></span>
+						<p><%- o2[i].title %></p>
+					</a>
+				</li>
+				<% } %>		
+			</ul>
+		</li>
+		<li style="display:none">
+			<ul class="content-list">
+				<% for(var i = 0, o3 = results['o3']; i < o3.length; ++i){ %>
+				<li>
+					<a href=<%- "/topics/search?_id=" + o3[i]._id %>>
+						<span style="float:right"><%- o3[i].readNum %></span>
+						<p><%- o3[i].title %></p>
+					</a>
+				</li>
+				<% } %>	
+			</ul>
+		</li>
+	</ul>
+</section>
+<section class="card">
+	<h2>服务中心</h2>
+	<ul class="tool-list">
+		<li><a href="">荣誉勋章</a></li>
+		<li><a href="">经验排行</a></li>
+		<li><a href="">VIP</a></li>
+		<li><a href="">监狱</a></li>
+		<li><a href="">荣誉勋章</a></li>
+		<li><a href="">经验排行</a></li>
+		<li><a href="">VIP</a></li>
+		<li><a href="">监狱</a></li>
+		<li><a href="">荣誉勋章</a></li>
+		<li><a href="">经验排行</a></li>
+		<li><a href="">VIP</a></li>
+		<li><a href="">监狱</a></li>
+	</ul>
+</section>
+<section class="card">
+	<h2>交流板块</h2>
+	<a href="/topics?type_id=0" class="ban">
+		<img src="/node.jpg">
+		<h2>默认板块</h2>
+		<span>主题:<%- results['c0'] %>/今:<%- results['c0t'] %></span>
+	</a>
+	<a href="/topics?type_id=1" class="ban">
+		<img src="/node.jpg">
+		<h2>笑话段子</h2>
+		<span>主题:<%- results['c1'] %>/今:<%- results['c1t'] %></span>
+	</a>
+	<a href="/topics?type_id=2" class="ban">
+		<img src="/node.jpg">
+		<h2>Node交流</h2>
+		<span>主题:<%- results['c2'] %>/今:<%- results['c2t'] %></span>
+	</a>
+	<a href="/topics?type_id=3" class="ban">
+		<img src="/node.jpg">
+		<h2>Web设计交流</h2>
+		<span>主题:<%- results['c3'] %>/今:<%- results['c3t'] %></span>
+	</a>
+	<a href="/topics?type_id=4" class="ban">
+		<img src="/node.jpg">
+		<h2>MongoDB交流</h2>
+		<span>主题:<%- results['c4'] %>/今:<%- results['c4t'] %></span>
+	</a>
+	<a href="/topics?type_id=5" class="ban">
+		<img src="/node.jpg">
+		<h2>Nginx交流</h2>
+		<span>主题:<%- results['c5'] %>/今:<%- results['c5t'] %></span>
+	</a>
+</section>
+<%- include footer %>

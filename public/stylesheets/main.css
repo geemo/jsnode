@@ -1,0 +1,750 @@
+/* 
+    默        认 14px
+    文 章  标 题 16px
+    文 章  内 容 15px
+    用   户   名 14px
+    附 加  信 息 12px
+    其余各类标题 15px
+
+    背 景  颜 色 #e1ffff
+    边 框  颜 色 #e1ffff
+    默认字体颜色 #888
+    连接字体颜色 #444
+    各类标题颜色 #000
+    文章标题颜色 #000
+    文章内容颜色 #000
+ */
+
+
+/* 页头 */
+
+header {}
+
+header nav {
+    background: #6cf;
+}
+
+header nav a {
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    vertical-align: text-top;
+    color: #fff;
+    width: 62px;
+    transition: font-size 0.1s;
+}
+
+header nav a:hover {
+    color: #cff;
+    font-size: 18px;
+}
+footer{
+    margin-bottom: 50px;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+
+/*面包屑导航*/
+
+.path {
+    margin: 5px 0;
+    padding: 0 10px;
+}
+
+
+/*卡片 */
+
+.card {
+    margin: 5px 0;
+    padding: 10px 0;
+    background: #fff;
+    font-size: 0;
+}
+
+.card > h2 {
+    font-size: 15px;
+    margin: 5px 0;
+    padding: 0 3px;
+    border-left: 7px solid #6cf;
+    color: #000;
+}
+
+.card > p {
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+
+/*表单 */
+
+.form {
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.form input,
+textarea {
+    display: block;
+    width: 100%;
+    outline: none;
+    border-bottom: 1px solid #e1ffff;
+    margin: 15px 0;
+    padding: 10px 0;
+}
+
+.form .error {
+    border-bottom: 1px solid #f00;
+}
+
+.form input[type=submit] {
+    border: none;
+    color: #fff;
+    background: #9f9;
+    outline: none;
+    transition: background 0.5s;
+}
+
+.form input[type=submit]:hover {
+    background: #0f0;
+}
+
+.form input[name="captcha"] {
+    width: 40%;
+    margin-top: 0;
+    float: left;
+}
+
+.form input:focus,
+.form textarea:focus {
+    border-color: #f91;
+}
+
+
+/*验证码 */
+
+.captcha {
+    display: inline-block;
+    line-height: 0;
+}
+
+.captcha span {
+    position: absolute;
+    display: inline-block;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    width: 90px;
+    background: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+}
+
+.captcha span:hover {
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
+
+
+/* 工具栏 */
+
+.tool-bar {
+    margin: 5px 0;
+    padding: 10px;
+    line-height: 22px;
+    background: #fff;
+    position: relative;
+}
+
+.tool-bar span,
+.tool-bar a {
+    font-size: 14px;
+    display: inline-block;
+    line-height: 22px;
+    vertical-align: bottom;
+}
+
+.tool-bar .active {
+    background: #6cf;
+    color: #fff;
+}
+
+
+/*工具列表 */
+
+.tool-list {
+    margin: 5px 0;
+    background: #fff;
+    font-size: 0;
+}
+
+.tool-list li {
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.tool-list li a {
+    color: #888;
+}
+
+
+/*页脚 */
+
+footer {
+    padding: 20px 0;
+    text-align: center;
+}
+
+
+/*提示*/
+
+#tip {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 5px 10px;
+    background: #6cf;
+    color: #fff;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+
+/* 404 */
+
+.notfound {
+    background: #fff;
+    text-align: center;
+}
+
+.notfound i {
+    font-size: 180px;
+    color: #f00;
+}
+
+.notfound p {
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+
+/********************** home 页 ********************/
+
+
+/* 搜索框 */
+
+.search {
+    margin: 10px;
+    position: relative;
+    line-height: 0;
+}
+
+.search input {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    padding: 0 45px 0 5px;
+}
+
+.search span{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 30px;
+    text-align: center;
+    border-left: 2px solid #e1ffff;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* tabs框 */
+
+.tabs {
+    margin: 5px 0;
+    padding: 5px 0px;
+    background: #fff;
+}
+
+.tabs-title {
+    height: 40px;
+    line-height: 40px;
+    margin: 0 10px;
+    border-bottom: 2px solid #e1ffff;
+}
+
+.tabs-title li {
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 40px;
+    border-bottom: 2px solid #e1ffff;
+    cursor: pointer;
+}
+
+.tabs-title li.active {
+    color: #f91;
+    border-color: #f91;
+}
+
+.content-list {
+    padding: 5px 0;
+}
+
+.content-list li {
+    height: 37px;
+    line-height: 37px;
+    padding: 0 10px;
+}
+
+.content-list li:hover {
+    background: #fffaf3;
+}
+
+.content-list li a {
+    display: block;
+}
+
+.content-list li p {
+    color: #444;
+    font-size: 15px;
+    margin-right: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content-list li span {
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* 板块 */
+
+.ban {
+    display: inline-block;
+    width: 50%;
+    background: #fff;
+    margin: 5px 0;
+}
+
+.ban:hover {
+    background: #fffaf3;
+}
+
+.ban img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 5px 10px;
+}
+
+.ban h2 {
+    font-size: 15px;
+    line-height: 30px;
+    color: #000;
+    display: block;
+}
+
+.ban span {
+    font-size: 12px;
+    line-height: 30px;
+    color: #888;
+    display: block;
+}
+
+
+/****************************users页*****************************/
+
+
+/* 用户卡片 */
+
+.user-card {
+    margin: 5px 0;
+    padding: 10px;
+    background: #fff;
+    height: 60px;
+}
+
+.user-card h2 {
+    color: #000;
+    line-height: 20px;
+    padding-left: 70px;
+}
+
+.user-card p {
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 70px;
+}
+
+.user-card form {
+    float: left;
+    height: 60px;
+    width: 60px;
+    position: relative;
+}
+
+.user-card form button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    width: 60px;
+    height: 30px;
+    line-height: 25px;
+    border-radius: 0 0 30px 30px;
+    text-align: center;
+    color: #e1ffff;
+    cursor: pointer;
+    outline: none;
+    display: none;
+}
+
+
+/* 头像预览 */
+
+.preview {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+    float: left;
+}
+
+.preview img {
+    border-radius: 30px;
+    height: 60px;
+    width: 60px;
+}
+
+
+/* 用户信息 */
+
+.user-info {
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.user-info li {
+    line-height: 40px;
+    border-bottom: 3px dashed #e1ffff;
+}
+
+.user-info li:last-child {
+    border: none;
+}
+
+.user-info li span:last-child {
+    float: right;
+    color: #000;
+}
+
+
+/***************topics页***************/
+
+.menu {
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+.menu-head {
+    display: inline-block;
+    width: 90px;
+    line-height: 22px;
+    padding: 0 26px 0 5px;
+    vertical-align: bottom;
+    position: relative;
+}
+
+.menu-head .arrow {
+    width: 0;
+    height: 0;
+    border-top: 8px solid #00b3ee;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    top: 7px;
+    right: 5px;
+}
+
+.menu-list {
+    width: 108px;
+    background: #fff;
+    z-index: 2;
+    position: absolute;
+}
+
+.menu-list a {
+    display: block;
+    padding: 0 5px;
+    line-height: 20px;
+    border-bottom: 2px solid #e1ffff;
+}
+
+.menu-list a:hover {
+    background: #e1ffff;
+}
+
+.topic {
+    display: block;
+    padding: 5px 0;
+    cursor: pointer;
+    border-bottom: 2px solid #e1ffff;
+}
+
+.topic:last-child {
+    border: none;
+}
+
+.topic .icon {
+    font-size: 12px;
+}
+
+.topic:hover {
+    background: #fffaf3;
+}
+
+.topic h2 {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #000;
+    display: block;
+    padding: 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topic-btm {
+    padding: 5px 10px;
+}
+
+.topic-btm span {
+    color: #888;
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+.page {
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0;
+    background: #fff;
+}
+
+.page ul li {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+}
+
+.page ul li:nth-child(3) {
+    width: 40%;
+}
+
+.page ul li input {
+    width: 30px;
+    border: 2px solid #cff;
+    outline: none;
+}
+
+.page ul li span {
+    display: block;
+    border-right: 2px solid #e1ffff;
+}
+
+
+/*********************topic内容详情页****************/
+
+.topic-title {
+    font-size: 16px;
+    padding: 5px 10px;
+    color: #000;
+    word-break: break-all;
+}
+
+.topic-content {
+    border-top: 1px solid #e1ffff;
+    font-size: 15px;
+    color: #000;
+    word-break: break-all;
+}
+
+.extra {
+    height: 30px;
+
+}
+
+.extra span {
+    line-height: 30px;
+    float: right;
+}
+
+.extra span a {
+    display: inline-block;
+    line-height: 30px;
+    font-size: 0;
+    padding: 0 10px;
+    color: #f91;
+}
+
+.extra .extra-favor-num,
+.extra .extra-zan-num {
+    font-size: 14px;
+}
+
+.comment {
+    display: block;
+    padding: 5px 0px;
+    font-size: 14px;
+    border-bottom: 1px solid #e1ffff;
+    min-height: 50px;
+    position: relative;
+}
+
+.comment h3,
+.comment p {
+    margin: 0 10px 0 50px;
+    line-height: 20px;
+    word-break: break-all;
+}
+
+.comment h3 a {
+    display: inline-block;
+    line-height: 20px;
+}
+
+.comment h3 span {
+    color: #888;
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    font-weight: normal;
+    display: inline-block;
+}
+
+.comment:last-child {
+    border: none;
+}
+
+.comment-title {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    padding: 5px 10px;
+}
+
+.comment-title a {
+    display: block;
+}
+
+.comment-title a img {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+
+.comment-title span {
+    display: block;
+    height: 20px;
+    text-align: center;
+}
+
+
+/*底部评论卡片*/
+
+.comment-card {
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #eee;
+}
+
+.comment-card form {
+    position: relative;
+    padding:0 50px 0 100px;
+}
+.comment-card form .preview{
+    position: absolute;
+    cursor: default;
+    top: -65px;
+    left: 43px;   
+}
+.comment-card form .preview span{
+    width: 0;
+    height: 0;
+    border-top: 8px solid #ddd;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: absolute;
+    top: 60px;
+    left: 23px;
+}
+.face-btn{
+    position: absolute;
+    line-height: 50px;
+    height: 50px;
+    top: 0;
+    left: 0;
+    background: #eee;
+    cursor: pointer;
+}
+.img-btn{
+    position: absolute;
+    line-height: 50px;
+    height: 50px;
+    top: 0;
+    left: 50px;
+    background: #eee;
+    cursor: pointer;
+}
+.send-btn{
+    position: absolute;
+    line-height: 50px;
+    height: 50px;
+    background: #eee;
+    color: #888;
+    top: 0;
+    right: 0;
+    outline: none;
+    cursor: pointer;
+}
+.face-btn i, .img-btn i, .send-btn i{
+    display: inline-block;
+    font-size: 30px;
+    padding:0 10px;
+    height: 50px;
+}
+
+.msg-ipt{
+    margin: 10px 0;
+    height: 30px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    outline: none;
+}

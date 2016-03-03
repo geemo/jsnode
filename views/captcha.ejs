@@ -1,0 +1,6 @@
+<input type="text" name="captcha" data-match='^\w{4}' placeholder="验证码:">
+<a href="javascript:void(0);" class="captcha">
+	<span>看不清,换</span>
+	<img src=<%- '/captcha?time=' + time %>>
+	<input type="text" name="time" value=<%- time %> style="display:none">
+</a>

@@ -1,0 +1,11 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<a href=<%- "/users/" + username %>>个人空间</a>
+	<span>/</span>
+	<span><%- sessUser && (sessUser.username == username) ? ("我的" + pathName) : ("Ta的" + pathName) %></span>
+</section>
+<%- include topics_card %>
+<%- include user_page %>
+<%- include footer %>

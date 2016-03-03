@@ -1,0 +1,18 @@
+<%- include header %>
+<section class="path">
+	<a href="/">网站首页</a> / 用户登录
+</section>
+<section class="card">
+	<h2>用户登录</h2>
+	<form action="/signin" method="post" class="form">
+		<input type="text" name="username" data-match=".+?" placeholder="用户名:">
+		<input type="password" name="password" data-match=".+?" placeholder="密码:">
+		<input type="submit" value="立即登陆">
+	</form>
+</section>
+<section class="tool-bar">
+	<span>其他</span>
+	<a href="/signup">注册</a>
+	<a href="/forget_pass">忘记密码?</a>
+</section>
+<%- include footer %>

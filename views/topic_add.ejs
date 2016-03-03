@@ -1,0 +1,20 @@
+<% include header %>
+<section class="path">
+	<a href="/">网站首页</a>
+	<span>/</span>
+	<a href="/topics">话题中心</a>
+	<span>/</span>
+	<a href=<%- "/topics?type_id=" + type_id %>><%- banName %></a>
+	<span>/</span>
+	<span>发表话题</span>
+</section>
+<section class="card">
+	<h2>发表话题</h2>
+	<form method="post" class="form" action=<%- "/topics?type_id=" + type_id %>>
+		<input type="text" name="title" data-match=".{5}" placeholder="标题不少于5字">
+		<textarea name="content" data-match=".{15}" cols="30" rows="5" placeholder="内容不少于15字"></textarea>
+		<input type="hidden" name="type_id" value=<%- type_id %>>
+		<input type="submit" value="立即发表">
+	</form>
+</section>
+<% include footer %>

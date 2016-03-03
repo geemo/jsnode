@@ -1,0 +1,23 @@
+{
+  "name": "jsnode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xyk",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "ccap": "^0.6.4",
+    "compression": "^1.6.1",
+    "connect-redis": "^3.0.2",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "formidable": "^1.0.17",
+    "ioredis": "^1.15.0",
+    "mongodb": "^2.1.4"
+  }
+}

@@ -1,0 +1,15 @@
+<section class="card">
+	<% if(topics.length){ %>
+		<% for(var i = 0; i < topics.length; ++i){ %>
+			<a class="topic" href=<%- "/topics/search?_id=" + topics[i]._id %>>
+				<h2><%- topics[i].title %></h2>
+				<div class="topic-btm">
+					<span><i class="icon icon-iconfonticon5"></i><%- topics[i].nickname %>&nbsp;<i class="icon icon-shizhong"></i><%- topics[i].dateStr + ' ' + topics[i].timeStr %></span>
+					<span class="right"><i class="icon icon-iconfontchakan" style="font-size:16px"></i><%- topics[i].readNum %>&nbsp;<i class="icon icon-pinglun2"></i><%- topics[i].cmtNum %></span>
+				</div>
+			</a>
+		<% } %>
+	<% }else{ %>	
+		<p>这块地方空空如也!</p>
+	<% } %>	
+</section>
