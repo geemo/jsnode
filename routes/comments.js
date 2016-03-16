@@ -1,5 +1,5 @@
 var IncomingForm = require('formidable').IncomingForm;
-var DateFormat   = require('../ctrls/date_format.js');
+var DateFormat   = require('../libs/date_format.js');
 var settings     = require('../settings.js');
 
 module.exports = function(router, db, redis, ObjectId){

@@ -1,6 +1,6 @@
 var EventEmitter = require('events').EventEmitter;
-var db_query     = require('../ctrls/db_query.js');
-var gen_cap      = require('../ctrls/gen_cap.js');
+var db_query     = require('../libs/db_query.js');
+var gen_cap      = require('../libs/gen_cap.js');
 
 var proxy = new EventEmitter();
 proxy.setMaxListeners(0);

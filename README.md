@@ -4,7 +4,7 @@
 
 使用了mongodb, redis数据库
 
-使用了nginx做反向代理服务器
+使用了nginx做缓存代理服务器
 
 使用了express作为后端框架
 

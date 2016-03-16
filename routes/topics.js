@@ -1,4 +1,4 @@
-var DateFormat   = require('../ctrls/date_format.js');
+var DateFormat   = require('../libs/date_format.js');
 var banNames = [
     '默认板块',
     '笑话段子',
