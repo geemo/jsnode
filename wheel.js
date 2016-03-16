@@ -22,7 +22,7 @@
 
         if (window.addEventListener) {
             return function(elem, type, fn, capture) {
-                if (type === 'mousewheel' && /firefox/i.test(navigator.userAgent)) {
+                if (type === 'mousewheel' && document.mozHidden !== undefined) {
                     type = 'DOMMouseScroll';
                 }
 
