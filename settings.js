@@ -4,6 +4,6 @@ module.exports = {
 	redis_session_url: 'redis://:Wmeiyoumima@127.0.0.1:6379/1',
 	pic_dir: '/home/jsnode/public/pictures',
 	img_dir: '/home/jsnode/public/images',
-	port: '81',
+	port: '80',
 	secret: 'jsnode'
 }
