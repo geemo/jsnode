@@ -75,8 +75,8 @@ module.exports = function(router, db, redis, ObjectId) {
             
             db.collection('topics').insertOne({
                 type_id: req.body.type_id,
-                title: req.body.title,
-                content: req.body.content,
+                title: req.body.title.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+                content: req.body.content.replace(/</g, '&lt;').replace(/>/g, '&gt;'),
                 username: req.session.user.username,
                 nickname: req.session.user.nickname,
                 readNum: 0,

@@ -76,7 +76,8 @@ footer{
     color: #000;
 }
 
-.card > p {
+.card p,
+.card pre {
     font-size: 18px;
     padding: 5px 10px;
 }
@@ -627,6 +628,10 @@ footer {
     margin: 0 10px 0 50px;
     line-height: 20px;
     word-break: break-all;
+}
+
+.comment p img{
+    max-width: 80%;
 }
 
 .comment h3 a {

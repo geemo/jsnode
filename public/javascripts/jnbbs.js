@@ -75,30 +75,23 @@
             if (key) {
                 key = key.dataset.key;
             }
+            var keyQueryStr = key ? ('&key=' + key) : '';
 
 
             var url = jumpIpt.dataset.url;
+            var symbol = (url.indexOf('?') == -1) ? '?' : '&';
             //跳转首页事件绑定
             firstPage.onclick = function(e) {
                 if (jumpIpt.dataset.totalPage != '1') {
-                    if (key) {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=1&key=' + key) : (url + '&page=1&key=' + key);
-                    } else {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=1') : (url + '&page=1');
-                    }
+                    window.location.href = url + symbol + 'page=1' + keyQueryStr;
                 }
             };
 
             var value = jumpIpt.value;
             //跳转上一页事件绑定
             prePage.onclick = function(e) {
-
                 if (jumpIpt.dataset.totalPage != '1' && value != '1') {
-                    if (key) {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + (parseInt(value) - 1) + '&key=' + key) : (url + '&page=' + (parseInt(value) - 1) + '&key=' + key);
-                    } else {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + (parseInt(value) - 1)) : (url + '&page=' + (parseInt(value) - 1));
-                    }
+                    window.location.href = url + symbol + 'page=' + (parseInt(value) - 1) + keyQueryStr;
                 }
             };
 
@@ -116,36 +109,22 @@
             };
             jumpIpt.onkeydown = function(e) {
 
-                if (this.value != value && parseInt(this.value) <= this.dataset.totalPage && e.keyCode == 13) {
-                    if (key) {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + this.value + '&key=' + key) : (url + '&page=' + this.value + '&key=' + key);
-                    } else {
-                        window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + this.value) : (url + '&page=' + this.value);
-                    }
+                if (this.value != value && parseInt(this.value) 
+                    <= this.dataset.totalPage && e.keyCode == 13) {
+                    window.location.href = url + symbol + 'page=' + this.value + keyQueryStr;
                 }
             };
 
             //跳转下一页事件绑定
             nextPage.onclick = function(e) {
                 if (this.innerHTML == '下一页') {
-
                     if (jumpIpt.value < jumpIpt.dataset.totalPage) {
-                        if (key) {
-                            window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + (parseInt(value) + 1) + '&key=' + key) : (url + '&page=' + (parseInt(value) + 1) + '&key=' + key);
-
-                        } else {
-                            window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + (parseInt(value) + 1)) : (url + '&page=' + (parseInt(value) + 1));
-
-                        }
+                        window.location.href = url + symbol + 'page=' + (parseInt(value) + 1) + keyQueryStr;
                     }
                 } else if (this.innerHTML == '跳转') {
-                    if (jumpIpt.value != value && parseInt(jumpIpt.value) <= jumpIpt.dataset.totalPage) {
-                        if (key) {
-                            window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + jumpIpt.value + '&key=' + key) : (url + '&page=' + jumpIpt.value + '&key=' + key);
-
-                        } else {
-                            window.location.href = (url.indexOf('?') == -1) ? (url + '?page=' + jumpIpt.value) : (url + '&page=' + jumpIpt.value);
-                        }
+                    if (jumpIpt.value != value && parseInt(jumpIpt.value) 
+                        <= jumpIpt.dataset.totalPage) {
+                        window.location.href = url + symbol + 'page=' + jumpIpt.value + keyQueryStr;
                     }
                 }
             };
@@ -170,12 +149,17 @@
                 cmtJump.onload = function(e) {
                     var data = JSON.parse(cmtJump.contentDocument.body.textContent);
                     if (data.status == 1) {
-                        console.log(data.imgUrl);
-                        if (data.imgUrl) {
-                            cmtsCard.insertAdjacentHTML('beforeend', '<div class="comment"><div class="comment-title"><a href="/users/' + data.username + '"><img src="/' + (data.headImgUrl ? ('images/' + data.headImgUrl) : 'node.jpg') + '"></a><span>#' + cmtsCard.children.length + '</span></div><h3><a href="/users/' + data.username + '">' + data.nickname + '</a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i>' + data.fullDate + '&nbsp;<a href="">回复</a></span></h3><p><img src="/pictures/' + data.imgUrl + '">' + msgIpt.value + '</p></div>');
-                        } else {
-                            cmtsCard.insertAdjacentHTML('beforeend', '<div class="comment"><div class="comment-title"><a href="/users/' + data.username + '"><img src="/' + (data.headImgUrl ? ('images/' + data.headImgUrl) : 'node.jpg') + '"></a><span>#' + cmtsCard.children.length + '</span></div><h3><a href="/users/' + data.username + '">' + data.nickname + '</a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i>' + data.fullDate + '&nbsp;<a href="">回复</a></span></h3><p>' + msgIpt.value + '</p></div>');
-                        }
+                        var commPart = '<div class="comment"><div class="comment-title"><a href="/users/' 
+                                + data.username + '"><img src="/' + (data.headImgUrl ? ('images/' + data.headImgUrl) : 'node.jpg') 
+                                + '"></a><span>#' + cmtsCard.children.length + '</span></div><h3><a href="/users/' + data.username + '">' 
+                                + data.nickname + '</a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i>' 
+                                + data.fullDate + '&nbsp;<a href="">回复</a></span></h3><p>';
+
+                        console.log(msgIpt.value.replace(/\[img=.+\]/, 
+                            '<img src="/pictures/' + data.imgUrl + '">'));
+                        cmtsCard.insertAdjacentHTML('beforeend', 
+                            commPart + msgIpt.value.replace(/\[img=.+\]/, 
+                            '<img src="/pictures' + data.imgUrl + '">') + '</p></div>');
                         //评论后屏幕滚到最底端
                         window.scrollTo(0, 9999999);
                         $.showTip('评论成功!');

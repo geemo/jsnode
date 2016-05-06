@@ -34,16 +34,17 @@ module.exports = function(router, db, redis, ObjectId) {
 
             if ((req.body.captcha).toLowerCase() == result) {
                 //注意 username == _id
+                var uname = req.body.username.replace(/</g, '&lt;').replace(/>/g, '&gt;');
                 db.collection('users')
-                    .find({_id: req.body.username}, {limit: 1})
+                    .find({_id: uname}, {limit: 1})
                     .toArray(function(err, docs) {
                         if (docs.length == 0) {
                             var dateFormat = new DateFormat();
                             
                             db.collection('users').insertOne({
-                                _id: req.body.username,
+                                _id: uname,
                                 password: req.body.password,
-                                nickname: 'JSNode' + req.body.username,
+                                nickname: 'JSNode' + uname,
                                 imgUrl: null,
                                 sign: '这位朋友很懒,什么也没留下!',
                                 levelName: '小白',

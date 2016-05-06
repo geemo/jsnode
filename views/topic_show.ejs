@@ -13,7 +13,7 @@
 	<div class="topic-btm">
 		<span><i class="icon icon-shizhong" style="font-size:12px"></i><%- topic.dateStr + ' ' + topic.timeStr %>&nbsp;<i class="icon icon-iconfontchakan" style="font-size:16px"></i><%- topic.readNum + 1 %></span>
 	</div>
-	<p class="topic-content"><%- topic.content %></p>
+	<pre class="topic-content"><%- topic.content %></pre>
 	<div class="extra">
 		<span>
 			<a href=<%- "/action?a=f&topic_id=" + topic._id %>>
@@ -42,11 +42,7 @@
 			<span>#<%- i + 1 %></span>
 		</div>
 		<h3><a href=<%- "/users/" + cmts[i].username %>><%- cmts[i].nickname %></a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i><%- cmts[i].date %>&nbsp;<a href="">回复</a></span></h3>
-		<% if(cmts[i].imgUrl){ %>
-		<p><img src=<%- "/pictures/" + cmts[i].imgUrl %>><%- cmts[i].content %></p>
-		<% }else{ %>
-		<p><%- cmts[i].content %></p>	
-		<% } %>	
+		<p><%- cmts[i].content %></p>
 	</div>	
 	<% } %>	
 </section>

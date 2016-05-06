@@ -42,7 +42,8 @@
                         if (httpRequest.readyState == XMLHttpRequest.DONE) {
                             if (success) {
                                 console.log(typeof httpRequest.responseText);
-                                if ((new RegExp('.*?json.*?')).test(httpRequest.getResponseHeader('Content-Type'))) {
+                                if ((new RegExp('.*?json.*?'))
+                                    .test(httpRequest.getResponseHeader('Content-Type'))) {
                                     success(httpRequest.status, JSON.parse(httpRequest.responseText));
                                 } else {
                                     success(httpRequest.status, httpRequest.responseText);
@@ -198,7 +199,8 @@
                                         //如果存在url
                                         if (data.url) {
                                             $.go(data.url, data.info);
-                                            that.form.querySelector('input[type=submit]').setAttribute('disabled', 'disabled');
+                                            that.form.querySelector('input[type=submit]')
+                                                .setAttribute('disabled', 'disabled');
                                         } else {
                                             $.showTip(data.info);
                                         }
@@ -224,7 +226,54 @@
                         }
                     }
                 }
+                //给文本输入框绑定
+                var msgIpt = that.form.querySelector('.msg-ipt');
+                var imgBtn = that.form.querySelector('input[name=img]');
+                if (msgIpt && imgBtn) {
+                    msgIpt.oninput = function(e) {
+                        if (imgBtn.value && !/\[img=.+\]/.test(msgIpt.value)) {
+                            //图片字符串
+                            var imgUbbStr = '[img=' + imgBtn.files[0].name;
+                            //图片字符串的光标位置
+                            var cursorIdx = this.value.indexOf(imgUbbStr);
+                            this.value = this.value.replace(imgUbbStr, '');
+                            //设置光标为图片字符串的位置
+                            if (this.createTextRange) { //IE浏览器
+                                var range = this.createTextRange();
+                                range.moveEnd("character", cursorIdx);
+                                range.moveStart("character", cursorIdx);
+                                range.select();
+                            } else { //非IE浏览器
+                                this.setSelectionRange(cursorIdx, cursorIdx);
+                                this.focus();
+                            }
+                            //清空选中图片
+                            imgBtn.value = '';
+                            that.preview.style.display = 'none';
+                        }
+                    };
+                }
+                //给图片预览框绑定事件
+                if (that.fileReader && imgBtn) {
+                    that.fileReader.onload = function(e) {
+                        that.preview.children[0].src = e.target.result;
+                    };
 
+                    imgBtn.onchange = function() {
+                        //显示预览
+                        that.showPreview(this);
+                        //如果是评论框
+                        if (that.form.target === 'cmtJump') {
+                            msgIpt.value = msgIpt.value.replace(/\[img=.+\]/, '') + '[img=' + imgBtn.files[0].name + ']';
+                        }
+                    };
+
+                    if (that.saveBtn) {
+                        that.saveBtn.onclick = function(e) {
+                            this.style.display = 'none';
+                        };
+                    }
+                }
 
                 //给验证码按钮绑定点击事件
                 if (that.captchaBtn && (typeof that.captchaBtn == 'object')) {
@@ -242,25 +291,6 @@
                         //重新创建一个定时器
                         intervalId = that.changeCaptcha();
                     };
-                }
-
-                //给头像绑定事件
-                if (that.fileReader) {
-                    that.fileReader.onload = function(e) {
-                        that.preview.children[0].src = e.target.result;
-                    };
-                    var imgBtn = that.form.querySelector('input[name=img]');
-                    if (imgBtn) {
-                        imgBtn.onchange = function() {
-                            //显示预览
-                            that.showPreview(this);
-                        };
-                    }
-                    if (that.saveBtn) {
-                        that.saveBtn.onclick = function(e) {
-                            this.style.display = 'none';
-                        };
-                    }
                 }
             }
 
