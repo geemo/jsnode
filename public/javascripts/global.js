@@ -41,7 +41,6 @@
                     httpRequest.onreadystatechange = function() {
                         if (httpRequest.readyState == XMLHttpRequest.DONE) {
                             if (success) {
-                                console.log(typeof httpRequest.responseText);
                                 if ((new RegExp('.*?json.*?'))
                                     .test(httpRequest.getResponseHeader('Content-Type'))) {
                                     success(httpRequest.status, JSON.parse(httpRequest.responseText));

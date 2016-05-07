@@ -7,9 +7,7 @@ var util = require('util');
 module.exports = function(router, db, redis, ObjectId){
 
 	router.post('/', function(req, res){
-		if(req.session.user){
-            console.log('---------------------');
-            
+		if(req.session.user){   
 			var form = new IncomingForm();
             form.uploadDir = settings.pic_dir;
             form.keepExtensions = true;
@@ -25,19 +23,24 @@ module.exports = function(router, db, redis, ObjectId){
 
 				var fullDate = dateFormat.getFullDate();
             	var fileName = files.img ? files.img.path.substr(form.uploadDir.length) : '';
-                console.log(fileName);
-                console.log(util.inspect({fields: fields, files: files}));
 
             	db.collection('users')
             	.find({_id: req.session.user.username}, {_id: 0, imgUrl: 1}, {limit: 1})
             	.toArray(function(err, docs){
-
+                    var quote = fields.msg_quote 
+                                ? JSON.parse(fields.msg_quote
+                                    .replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/\[img=(.+)\]/, '<img src=\'$1\'>'))
+                                : '';
             		db.collection('comments')
 					.insertOne({
 						topic_id: fields.topic_id,
 						content: fields.msg.replace(/</g, '&lt;')
-                                            .replace(/>/g, '&gt;')
-                                            .replace(/\[img=.+\]/, '<img src="/pictures' + fileName + '">'),
+                                           .replace(/>/g, '&gt;')
+                                           .replace(/\[img=.+\]/, '<img src="/pictures' + fileName + '">'),
+                        quoteTit: quote && quote.tit,
+                        quoteCnt: quote && quote.cnt,
 						username: req.session.user.username,
 						nickname: req.session.user.nickname,
 						date: fullDate,

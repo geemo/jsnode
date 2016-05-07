@@ -624,19 +624,26 @@ footer {
 }
 
 .comment h3,
-.comment p {
+.comment .comment-content{
     margin: 0 10px 0 50px;
     line-height: 20px;
     word-break: break-all;
 }
 
-.comment p img{
+.comment .comment-content img{
     max-width: 80%;
+}
+
+.comment .comment-content blockquote{
+    border-left: 7px solid #6cf;
+    padding: 5px 10px 5px 5px;
+    background: #e1ffff;
 }
 
 .comment h3 a {
     display: inline-block;
     line-height: 20px;
+    cursor: pointer;
 }
 
 .comment h3 span {
@@ -652,7 +659,7 @@ footer {
     border: none;
 }
 
-.comment-title {
+.comment .comment-title {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -660,17 +667,17 @@ footer {
     padding: 5px 10px;
 }
 
-.comment-title a {
+.comment .comment-title a {
     display: block;
 }
 
-.comment-title a img {
+.comment .comment-title a img {
     height: 30px;
     width: 30px;
     border-radius: 15px;
 }
 
-.comment-title span {
+.comment .comment-title span {
     display: block;
     height: 20px;
     text-align: center;

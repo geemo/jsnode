@@ -109,8 +109,7 @@
             };
             jumpIpt.onkeydown = function(e) {
 
-                if (this.value != value && parseInt(this.value) 
-                    <= this.dataset.totalPage && e.keyCode == 13) {
+                if (this.value != value && parseInt(this.value) <= this.dataset.totalPage && e.keyCode == 13) {
                     window.location.href = url + symbol + 'page=' + this.value + keyQueryStr;
                 }
             };
@@ -122,8 +121,7 @@
                         window.location.href = url + symbol + 'page=' + (parseInt(value) + 1) + keyQueryStr;
                     }
                 } else if (this.innerHTML == '跳转') {
-                    if (jumpIpt.value != value && parseInt(jumpIpt.value) 
-                        <= jumpIpt.dataset.totalPage) {
+                    if (jumpIpt.value != value && parseInt(jumpIpt.value) <= jumpIpt.dataset.totalPage) {
                         window.location.href = url + symbol + 'page=' + jumpIpt.value + keyQueryStr;
                     }
                 }
@@ -131,7 +129,7 @@
         }
     }();
 
-    // 发送评论
+    // 发送和回复评论
     ! function() {
         var cmtForm = document.querySelector('form[target=cmtJump]');
         if (cmtForm) {
@@ -145,24 +143,33 @@
                 var cmtJump = document.querySelector('iframe[name=cmtJump]');
                 //评论卡片
                 var cmtsCard = document.querySelector('#cmtsCard');
-
+                //所有评论
+                var cmts = cmtsCard.querySelectorAll('.comment');
+                //引用文本
+                var quote = '';
+                //引用昵称
+                var quoteName = '';
+                // iframe加载后
                 cmtJump.onload = function(e) {
                     var data = JSON.parse(cmtJump.contentDocument.body.textContent);
                     if (data.status == 1) {
-                        var commPart = '<div class="comment"><div class="comment-title"><a href="/users/' 
-                                + data.username + '"><img src="/' + (data.headImgUrl ? ('images/' + data.headImgUrl) : 'node.jpg') 
-                                + '"></a><span>#' + cmtsCard.children.length + '</span></div><h3><a href="/users/' + data.username + '">' 
-                                + data.nickname + '</a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i>' 
-                                + data.fullDate + '&nbsp;<a href="">回复</a></span></h3><p>';
+                        var quoteTxt = quote ? ('<blockquote><h5>引用' + quoteName + ':</h5>' + quote + '</blockquote><p>') : '<p>';
+                        var commPartTop = '<div class="comment"><div class="comment-title"><a href="/users/' + data.username + '"><img src="/' + (data.headImgUrl ? ('images/' + data.headImgUrl) : 'node.jpg') + '"></a><span>#' + cmtsCard.children.length + '</span></div><h3><a href="/users/' + data.username + '">' + data.nickname + '</a><p></h3><div class="comment-content">' + quoteTxt;
 
-                        console.log(msgIpt.value.replace(/\[img=.+\]/, 
-                            '<img src="/pictures/' + data.imgUrl + '">'));
-                        cmtsCard.insertAdjacentHTML('beforeend', 
-                            commPart + msgIpt.value.replace(/\[img=.+\]/, 
-                            '<img src="/pictures' + data.imgUrl + '">') + '</p></div>');
+                        var commPartBottom = '</p></div><h3 style="height: 20px"><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i>' + data.fullDate + '&nbsp;<a class="reply">回复</a></span></h3></div>';
+
+                        cmtsCard.insertAdjacentHTML('beforeend',
+                            commPartTop + msgIpt.value.replace(/\[img=.+\]/,
+                                '<img src="/pictures' + data.imgUrl + '">') + commPartBottom);
+                        //给新添加的评论绑定点击事件
+                        var lastChild = cmtsCard.lastChild;
+                        lastChild.querySelector('.reply').onclick = replyClick(lastChild);
                         //评论后屏幕滚到最底端
                         window.scrollTo(0, 9999999);
                         $.showTip('评论成功!');
+
+                        quote = '';
+                        quoteName = '';
                     }
                     //提交后清空图片和文字
                     imgBtn.value = '';
@@ -179,6 +186,42 @@
                     }
 
                 };
+
+                if (cmts.length) {
+                    for (var i = cmts.length - 1; i >= 0; --i) {
+                        ! function(cmt) {
+                            cmt.querySelector('.reply').onclick = replyClick(cmt);
+                        }(cmts[i]);
+                    }
+                }
+
+                function replyClick(cmt) {
+                    return function(e) {
+                        e.preventDefault();
+                        if (this.innerHTML === '回复') {
+                            this.innerHTML = '取消';
+                            // 昵称和楼层组合名
+                            quoteName = cmt.querySelector('h3>a').innerHTML + cmt.querySelector('.comment-title>span').innerHTML;
+                            // 点击后修改输入框占位文本            
+                            msgIpt.placeholder = '回复' + quoteName + ':';
+
+                            // 获取引用文本
+                            quote = cmt.querySelector('.comment-content>p').innerHTML;
+                            cmtForm.querySelector('input[name=msg_quote]').value = JSON.stringify({
+                                tit: quoteName,
+                                cnt: quote.replace(/\<img src="(.+)"\>/, '[img=$1]')
+                            });
+                            //输入框获取焦点
+                            msgIpt.focus();
+                        } else {
+                            this.innerHTML = '回复';
+                            cmtForm.querySelector('input[name=msg_quote]').value = '';
+                            msgIpt.placeholder = '评论内容不能为空!';
+                            quote = '';
+                            quoteName = '';
+                        }
+                    };
+                }
             }
         }
     }();

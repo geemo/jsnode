@@ -41,8 +41,17 @@
 			<a href=<%- "/users/" + cmts[i].username %>><img src=<%- cmts[i].headImgUrl ? ("/images/" + cmts[i].headImgUrl) : "/node.jpg" %>></a>
 			<span>#<%- i + 1 %></span>
 		</div>
-		<h3><a href=<%- "/users/" + cmts[i].username %>><%- cmts[i].nickname %></a><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i><%- cmts[i].date %>&nbsp;<a href="">回复</a></span></h3>
-		<p><%- cmts[i].content %></p>
+		<h3><a href=<%- "/users/" + cmts[i].username %>><%- cmts[i].nickname %></a></h3>
+		<div class="comment-content">
+			<% if(cmts[i].quoteTit){ %>
+			<blockquote>
+				<h5>引用<%- cmts[i].quoteTit %>:</h5>
+				<%- cmts[i].quoteCnt %>
+			</blockquote>
+			<% } %>
+			<p><%- cmts[i].content %></p>
+		</div>
+		<h3 style="height: 20px"><span class="right"><i class="icon icon-shizhong" style="font-size:12px"></i><%- cmts[i].date %>&nbsp;<a class="reply">回复</a></span></div>
 	</div>	
 	<% } %>	
 </section>
@@ -53,7 +62,8 @@
 		<label for="imgBtn" class="img-btn"><i class="icon icon-tupian"></i></label>
 		<input type="file" id="imgBtn" name="img" accept="image/*" style="display: none">
 		<div class="preview" style="display:none"><img><span></span></div>
-		<input type="text" class="msg-ipt" name="msg" placeholder="评论内容不能为空!" autocomplete="off">
+		<input type="text" class="msg-ipt" name="msg" placeholder="评论内容不能为空!" autocomplete="off" onkeydown='if(event.keyCode==13) return false;'>
+		<input type="hidden" name="msg_quote">
 		<input type="hidden" name="topic_id" value=<%- topic._id %>>
 		<a class="send-btn" href=<%- sessUser ? "javascript:void(0);" : "/signin"%>><i class="icon icon-daohang"></i></a>
 	</form>
