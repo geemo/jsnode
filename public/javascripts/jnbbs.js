@@ -149,6 +149,8 @@
                 var quote = '';
                 //引用昵称
                 var quoteName = '';
+                //回复按钮
+                var replyBtn = null;
                 // iframe加载后
                 cmtJump.onload = function(e) {
                     var data = JSON.parse(cmtJump.contentDocument.body.textContent);
@@ -168,8 +170,7 @@
                         window.scrollTo(0, 9999999);
                         $.showTip('评论成功!');
 
-                        quote = '';
-                        quoteName = '';
+                        clearReply(replyBtn);
                     }
                     //提交后清空图片和文字
                     imgBtn.value = '';
@@ -198,6 +199,7 @@
                 function replyClick(cmt) {
                     return function(e) {
                         e.preventDefault();
+                        replyBtn = this;
                         if (this.innerHTML === '回复') {
                             this.innerHTML = '取消';
                             // 昵称和楼层组合名
@@ -214,13 +216,17 @@
                             //输入框获取焦点
                             msgIpt.focus();
                         } else {
-                            this.innerHTML = '回复';
-                            cmtForm.querySelector('input[name=msg_quote]').value = '';
-                            msgIpt.placeholder = '评论内容不能为空!';
-                            quote = '';
-                            quoteName = '';
+                            clearReply(this);
                         }
                     };
+                }
+
+                function clearReply(rb) {
+                    rb.innerHTML = '回复';
+                    cmtForm.querySelector('input[name=msg_quote]').value = '';
+                    msgIpt.placeholder = '评论内容不能为空!';
+                    quote = '';
+                    quoteName = '';
                 }
             }
         }
